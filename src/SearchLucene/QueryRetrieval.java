@@ -32,7 +32,8 @@ public class QueryRetrieval {
     private IndexSearcher indexSearcher;
     private String[]fields;
     private Map<String,Float> boosts;
-    private final String PREFIX="https://www.youtube.com/watch?v=";
+    private final String PREFIX="https://www.youtube.com/embed/";
+    private final String POSTFIX ="?rel=0";
 
     public QueryRetrieval(MyIndexReader ixreader) throws IOException {
             directory = FSDirectory.open(Paths.get(Path.IndexDir));
@@ -41,8 +42,8 @@ public class QueryRetrieval {
             fields = new String[]{"TITLE","DESCRIPTION","TAGS","SUBTITLES"};
             boosts = new HashMap<>();
             boosts.put("TITLE",8.0f);
-            boosts.put("DESCRIPTION",6.0f);
-            boosts.put("TAGS",4.0f);
+            boosts.put("DESCRIPTION",4.0f);
+            boosts.put("TAGS",6.0f);
             boosts.put("SUBTITLES",2.0f);
 
     }
@@ -63,7 +64,7 @@ public class QueryRetrieval {
         List<String> URLs = new ArrayList<>();
         if(results != null){
             for(Document result:results){
-                URLs.add(PREFIX+result.docno());
+                URLs.add(PREFIX+result.docno()+POSTFIX);
             }
         }
         return URLs;
