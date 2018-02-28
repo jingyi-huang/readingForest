@@ -17,4 +17,4 @@ apache lucene part for reading forest project
 * Different weights on different fields
 
 #### System Interface
-Update Form : User can update his/her profile ![](screenshots/edit.png)
+![](screenshot/interface.png)
